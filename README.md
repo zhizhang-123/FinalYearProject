@@ -1,6 +1,6 @@
 # finalyearproject
 
-SHIT
+Give Me A+
 
 ## Getting Started
 
