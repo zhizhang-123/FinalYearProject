@@ -1,6 +1,6 @@
-# finalyearproject
+# FinalYearProject
 
-Give Me A+
+Give Me A 💯
 
 ## Getting Started
 
