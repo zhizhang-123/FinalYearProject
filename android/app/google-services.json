@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "316655320443",
+    "project_id": "plant-disease-efef2",
+    "storage_bucket": "plant-disease-efef2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316655320443:android:27c30095c5bd757ae691de",
+        "android_client_info": {
+          "package_name": "com.example.plantcarewithai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzf-Cp7mRUdvnzW9z-qB63nXfwHYqKqJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
