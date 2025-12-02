@@ -41,46 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC1qZPnpFIVjT1k9obpQcBhiPEXFAcdTUM',
-    appId: '1:316655320443:web:5256e36484e57562e691de',
-    messagingSenderId: '316655320443',
-    projectId: 'plant-disease-efef2',
-    authDomain: 'plant-disease-efef2.firebaseapp.com',
-    storageBucket: 'plant-disease-efef2.firebasestorage.app',
+    apiKey: 'AIzaSyB441fegqd5M3W92GSiWc6iGodsLyTnLZk',
+    appId: '1:1018205901880:web:734a20a637be952d1502cd',
+    messagingSenderId: '1018205901880',
+    projectId: 'fyp-plant-1ee1e',
+    authDomain: 'fyp-plant-1ee1e.firebaseapp.com',
+    storageBucket: 'fyp-plant-1ee1e.firebasestorage.app',
+    measurementId: 'G-6VFH0TFJZG',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBzf-Cp7mRUdvnzW9z-qB63nXfwHYqKqJ0',
-    appId: '1:316655320443:android:27c30095c5bd757ae691de',
-    messagingSenderId: '316655320443',
-    projectId: 'plant-disease-efef2',
-    storageBucket: 'plant-disease-efef2.firebasestorage.app',
+    apiKey: 'AIzaSyBs6HHG42cw10_XUE_tN-nnY-VRrwKLA3s',
+    appId: '1:1018205901880:android:5ea78cb6f820fdaa1502cd',
+    messagingSenderId: '1018205901880',
+    projectId: 'fyp-plant-1ee1e',
+    storageBucket: 'fyp-plant-1ee1e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDgJ25niGkJpvuf6Ma71RGQCmTBc0ZlgNU',
-    appId: '1:316655320443:ios:1b15e297dda69a08e691de',
-    messagingSenderId: '316655320443',
-    projectId: 'plant-disease-efef2',
-    storageBucket: 'plant-disease-efef2.firebasestorage.app',
+    apiKey: 'AIzaSyBf08fyP-piuXaIiLdyhucvaxDo9qmejZM',
+    appId: '1:1018205901880:ios:3b68e8560ff210821502cd',
+    messagingSenderId: '1018205901880',
+    projectId: 'fyp-plant-1ee1e',
+    storageBucket: 'fyp-plant-1ee1e.firebasestorage.app',
     iosBundleId: 'com.example.plantcarewithai',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDgJ25niGkJpvuf6Ma71RGQCmTBc0ZlgNU',
-    appId: '1:316655320443:ios:1b15e297dda69a08e691de',
-    messagingSenderId: '316655320443',
-    projectId: 'plant-disease-efef2',
-    storageBucket: 'plant-disease-efef2.firebasestorage.app',
+    apiKey: 'AIzaSyBf08fyP-piuXaIiLdyhucvaxDo9qmejZM',
+    appId: '1:1018205901880:ios:3b68e8560ff210821502cd',
+    messagingSenderId: '1018205901880',
+    projectId: 'fyp-plant-1ee1e',
+    storageBucket: 'fyp-plant-1ee1e.firebasestorage.app',
     iosBundleId: 'com.example.plantcarewithai',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyC1qZPnpFIVjT1k9obpQcBhiPEXFAcdTUM',
-    appId: '1:316655320443:web:e31a9872d75593ece691de',
-    messagingSenderId: '316655320443',
-    projectId: 'plant-disease-efef2',
-    authDomain: 'plant-disease-efef2.firebaseapp.com',
-    storageBucket: 'plant-disease-efef2.firebasestorage.app',
+    apiKey: 'AIzaSyB441fegqd5M3W92GSiWc6iGodsLyTnLZk',
+    appId: '1:1018205901880:web:f2f390cb0c95c74a1502cd',
+    messagingSenderId: '1018205901880',
+    projectId: 'fyp-plant-1ee1e',
+    authDomain: 'fyp-plant-1ee1e.firebaseapp.com',
+    storageBucket: 'fyp-plant-1ee1e.firebasestorage.app',
+    measurementId: 'G-L4CKT1DPC1',
   );
 }

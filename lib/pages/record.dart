@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'plantrecord.dart';
+import 'recordlist.dart';
 
 class RecordPage extends StatefulWidget {
   RecordPage({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _RecordPageState extends State<RecordPage>{
                 imagePath: 'assets/leafphoto.png',
                 buttonName: 'Plant Record',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PlantRecordPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => RecordListPage()));
                 },
               ),
 
