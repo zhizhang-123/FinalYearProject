@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'recordlist.dart';
+import 'historylist.dart';
 
 class RecordPage extends StatefulWidget {
   RecordPage({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _RecordPageState extends State<RecordPage>{
                 imagePath: 'assets/selectphoto.png',
                 buttonName: 'Plant Disease History',
                 onTap: () {
-                  print('b');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryListPage()));
                 },
               ),
 

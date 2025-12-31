@@ -13,17 +13,13 @@ class PlantRecordPage extends StatefulWidget {
 }
 
 class _PlantRecordPageState extends State<PlantRecordPage> {
-  // 控制器，用于获取文本框输入
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
 
-  File? _photo; // 存储用户拍摄/选择的照片
+  File? _photo;
   final ImagePicker _picker = ImagePicker();
-  bool _isUploading = false; // 上传状态Loading
+  bool _isUploading = false;
 
-  // ==========================================
-  // 1. 补全缺失的：选择图片功能
-  // ==========================================
   Future<void> _pickImage(ImageSource source) async {
     final XFile? pickedFile = await _picker.pickImage(source: source, imageQuality: 10);
 
@@ -34,42 +30,28 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
     }
   }
 
-  // ==========================================
-  // 2. 上传功能 (保持你原本正确的逻辑)
-  // ==========================================
   Future<void> _uploadPlant() async {
-    // 基本检查
     if (_photo == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('请先拍照')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Take Photo First')));
       return;
     }
 
     setState(() { _isUploading = true; });
 
     try {
-      // 准备文件名 (使用当前时间戳)
       final String fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
 
-      // 获取引用
-      // (新项目会自动从 google-services.json 读取 bucket，无需手动指定)
       final Reference storageRef = FirebaseStorage.instance
           .ref()
-          .child('plant_photos') // 存放在 plant_photos 文件夹
+          .child('plant_photos')
           .child(fileName);
 
-      // 上传文件
-      print("开始上传...");
       final UploadTask uploadTask = storageRef.putFile(_photo!);
 
-      // 等待上传完成
       final TaskSnapshot snapshot = await uploadTask;
-      print("上传成功！");
 
-      // 获取下载链接
       final String downloadUrl = await snapshot.ref.getDownloadURL();
-      print("图片链接: $downloadUrl");
 
-      // 存入 Firestore
       User? user = FirebaseAuth.instance.currentUser;
       String uid = user?.uid ?? "anonymous";
 
@@ -82,14 +64,13 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
       });
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('保存成功！🌱')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Save successful！🌱')));
         Navigator.pop(context); // 返回上一页
       }
 
     } catch (e) {
-      print("报错了: $e");
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('上传失败: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Upload fail: $e')));
       }
     } finally {
       if (mounted) {

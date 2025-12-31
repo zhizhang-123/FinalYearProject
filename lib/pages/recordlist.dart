@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// 【重要】请确认这里引入了你之前写的“添加页面”的文件名
 import 'plantrecord.dart';
 
 class RecordListPage extends StatelessWidget {
@@ -9,13 +8,11 @@ class RecordListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. 获取当前登录的用户
     final User? user = FirebaseAuth.instance.currentUser;
 
-    // 如果用户没登录（理论上不应该发生，但为了安全起见）
     if (user == null) {
       return const Scaffold(
-        body: Center(child: Text("请先登录")),
+        body: Center(child: Text("Login First!")),
       );
     }
 
@@ -60,7 +57,7 @@ class RecordListPage extends StatelessWidget {
 
           // 状态 B：如果出错了
           if (snapshot.hasError) {
-            return Center(child: Text('加载失败: ${snapshot.error}'));
+            return Center(child: Text('Failed loading: ${snapshot.error}'));
           }
 
           // 状态 C：如果没有数据，或者数据列表为空 (实现你的要求)
@@ -115,11 +112,11 @@ class RecordListPage extends StatelessWidget {
 
   // ================= 子组件：植物卡片视图 =================
   Widget _buildPlantCard(Map<String, dynamic> data, String docID, BuildContext context) {
-    final String name = data['name'] ?? '未知植物';
-    final String description = data['description'] ?? '暂无描述';
+    final String name = data['name'] ?? 'Unknown Plant';
+    final String description = data['description'] ?? 'No Description';
     final String imageUrl = data['imageUrl'] ?? '';
 
-    String dateString = '未知日期';
+    String dateString = 'Unknown Date';
 
     // 检查数据库里有没有 createdAt 这个字段
     if (data['createdAt'] != null) {

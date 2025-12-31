@@ -36,6 +36,12 @@ dependencies:
   firebase_storage: ^12.4.10
   cloud_firestore: ^5.6.12
   path: ^1.8.3
+  firebase_ml_model_downloader: ^0.3.3
+  google_mlkit_image_labeling: ^0.13.0
+  intl: ^0.18.0
+  geolocator: ^13.0.0
+  url_launcher: ^6.3.0
+  flutter_local_notifications: ^17.0.0
   flutter:
     sdk: flutter
 
