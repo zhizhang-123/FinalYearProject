@@ -27,9 +27,9 @@ class HistoryListPage extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print("Firestore Error: ${snapshot.error}"); // 在控制台打印详细错误
+            print("Firestore Error: ${snapshot.error}");
             return Center(
-              child: Text("Error: ${snapshot.error}"), // 在屏幕上显示错误
+              child: Text("Error: ${snapshot.error}"),
             );
           }
 
@@ -65,7 +65,6 @@ class HistoryListPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 图片部分保持不变
                     if (imageUrl.isNotEmpty)
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),

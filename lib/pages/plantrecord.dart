@@ -65,7 +65,7 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Save successful！🌱')));
-        Navigator.pop(context); // 返回上一页
+        Navigator.pop(context);
       }
 
     } catch (e) {
@@ -95,10 +95,8 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // 图片展示区域
             GestureDetector(
               onTap: () {
-                // 点击弹出选择框：拍照或相册
                 showModalBottomSheet(
                   context: context,
                   builder: (context) => SafeArea(
@@ -109,7 +107,7 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
                           title: const Text('Take Photo'),
                           onTap: () {
                             Navigator.pop(context);
-                            _pickImage(ImageSource.camera); // 这里的红线现在应该消失了
+                            _pickImage(ImageSource.camera);
                           },
                         ),
                         ListTile(
@@ -117,7 +115,7 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
                           title: const Text('Gallery'),
                           onTap: () {
                             Navigator.pop(context);
-                            _pickImage(ImageSource.gallery); // 这里的红线现在应该消失了
+                            _pickImage(ImageSource.gallery);
                           },
                         ),
                       ],
@@ -149,7 +147,6 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
             ),
             const SizedBox(height: 20),
 
-            // 输入框：植物名称
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(
@@ -160,7 +157,6 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
             ),
             const SizedBox(height: 16),
 
-            // 输入框：备注描述
             TextField(
               controller: _descController,
               maxLines: 3,
@@ -172,7 +168,6 @@ class _PlantRecordPageState extends State<PlantRecordPage> {
             ),
             const SizedBox(height: 30),
 
-            // 上传按钮
             ElevatedButton(
               onPressed: _isUploading ? null : _uploadPlant,
               style: ElevatedButton.styleFrom(

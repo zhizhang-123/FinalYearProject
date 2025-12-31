@@ -27,10 +27,8 @@ class RecordListPage extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
 
-      // 2. 右下角的添加按钮
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // 跳转到添加页面
           Navigator.push(context, MaterialPageRoute(builder: (context) => PlantRecordPage()));
         },
         label: const Text("Add"),
@@ -38,44 +36,33 @@ class RecordListPage extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
 
-      // 3. 核心部分：实时监听数据库数据的 StreamBuilder
       body: StreamBuilder<QuerySnapshot>(
-        // 构建查询：
-        // 1. 找 'plants' 集合
-        // 2. 过滤条件：userId 必须等于当前用户的 uid
-        // 3. 排序：按创建时间 'createdAt' 倒序排列（新的在上面）
         stream: FirebaseFirestore.instance
             .collection('plants')
             .where('userId', isEqualTo: user.uid)
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          // 状态 A：如果连接正在等待中（通常是刚打开页面时）
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // 状态 B：如果出错了
           if (snapshot.hasError) {
             return Center(child: Text('Failed loading: ${snapshot.error}'));
           }
 
-          // 状态 C：如果没有数据，或者数据列表为空 (实现你的要求)
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return _buildEmptyState();
           }
 
-          // 状态 D：有数据了！构建列表
           final documents = snapshot.data!.docs;
 
           return ListView.builder(
             padding: const EdgeInsets.all(12),
             itemCount: documents.length,
             itemBuilder: (context, index) {
-              // 获取单个文档的数据
               final data = documents[index].data() as Map<String, dynamic>;
               final String docID = documents[index].id;
-              // 构建卡片视图
               return _buildPlantCard(data, docID, context);
             },
           );
@@ -84,7 +71,6 @@ class RecordListPage extends StatelessWidget {
     );
   }
 
-  // ================= 子组件：空状态视图 =================
   Widget _buildEmptyState() {
     return Center(
       child: Column(
@@ -110,7 +96,6 @@ class RecordListPage extends StatelessWidget {
     );
   }
 
-  // ================= 子组件：植物卡片视图 =================
   Widget _buildPlantCard(Map<String, dynamic> data, String docID, BuildContext context) {
     final String name = data['name'] ?? 'Unknown Plant';
     final String description = data['description'] ?? 'No Description';
@@ -118,15 +103,10 @@ class RecordListPage extends StatelessWidget {
 
     String dateString = 'Unknown Date';
 
-    // 检查数据库里有没有 createdAt 这个字段
     if (data['createdAt'] != null) {
-      // 这里的 data['createdAt'] 可能是 Timestamp (Firestore专用格式)
-      // 所以我们先尝试把它转成 DateTime
       Timestamp t = data['createdAt'] as Timestamp;
       DateTime date = t.toDate();
 
-      // 2. 把它变成好看的字符串，例如 "2025-12-02 14:30"
-      // padLeft(2,'0') 的意思是如果月份是 5，自动变成 05
       dateString = "${date.year}-${date.month.toString().padLeft(2,'0')}-${date.day.toString().padLeft(2,'0')} ${date.hour.toString().padLeft(2,'0')}:${date.minute.toString().padLeft(2,'0')}";
     }
 
@@ -139,7 +119,6 @@ class RecordListPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 左侧：图片
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Container(
@@ -150,13 +129,10 @@ class RecordListPage extends StatelessWidget {
                     ? Image.network(
                   imageUrl,
                   fit: BoxFit.cover,
-                  // 添加一个简单的加载占位符
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    //return const Center(child: Icon(Icons.image, color: Colors.grey));
                     return const Center(child: CircularProgressIndicator());
                   },
-                  // 添加加载错误处理
                   errorBuilder: (context, error, stackTrace) {
                     return const Icon(Icons.broken_image, color: Colors.grey);
                   },
@@ -165,7 +141,6 @@ class RecordListPage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            // 右侧：文字信息
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +148,6 @@ class RecordListPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // 名字 (使用 Expanded 防止名字太长把按钮挤出屏幕)
                       Expanded(
                         child: Text(
                           name,
@@ -182,13 +156,12 @@ class RecordListPage extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // 🗑️ 删除按钮
                       IconButton(
                         icon: const Icon(Icons.delete_outline, color: Colors.red),
                         padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(), // 让按钮紧凑一点
+                        constraints: const BoxConstraints(),
                         onPressed: () {
-                          _confirmDelete(context, docID); // 点击触发确认弹窗
+                          _confirmDelete(context, docID);
                         },
                       ),
                     ],
@@ -204,7 +177,7 @@ class RecordListPage extends StatelessWidget {
                       height: 1.3,
                     ),
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis, // 文字太长显示省略号
+                    overflow: TextOverflow.ellipsis,
                   ),
 
                   const SizedBox(height: 8),
@@ -214,7 +187,7 @@ class RecordListPage extends StatelessWidget {
                       const Icon(Icons.access_time, size: 14, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
-                        "$dateString", // 这里显示刚才算出来的日期
+                        "$dateString",
                         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       ),
                     ],
@@ -229,7 +202,6 @@ class RecordListPage extends StatelessWidget {
   }
 }
 
-// ================= 辅助函数：删除确认弹窗 =================
 void _confirmDelete(BuildContext context, String docID) {
   showDialog(
     context: context,
@@ -238,17 +210,13 @@ void _confirmDelete(BuildContext context, String docID) {
         title: const Text("Confirm Delete?"),
         content: const Text("Are you confirm delete this record? Cannot restore after deleted."),
         actions: [
-          // 取消按钮
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
             child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
           ),
-          // 确认删除按钮
           TextButton(
             onPressed: () async {
-              Navigator.of(ctx).pop(); // 先关掉弹窗
-
-              // 执行删除操作
+              Navigator.of(ctx).pop();
               try {
                 await FirebaseFirestore.instance
                     .collection('plants')
