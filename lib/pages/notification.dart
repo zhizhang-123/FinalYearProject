@@ -131,7 +131,7 @@ class _NotificationPageState extends State<NotificationPage> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              _deleteNotification(docId);
+              _confirmDeleteNotification(docId);
             },
             child: const Text("Delete", style: TextStyle(color: Colors.red)),
           ),
@@ -237,6 +237,29 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
       );
     }
+  }
+
+  void _confirmDeleteNotification(String docId) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Confirm Delete?"),
+        content: const Text("Are you confirm delete this record? Cannot restore after deleted."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              _deleteNotification(docId);
+            },
+            child: const Text("Delete", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
   }
 
   void _deleteNotification(String id) async {
